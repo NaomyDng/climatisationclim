@@ -9,7 +9,7 @@
   <meta name="robots" content="index,follow" />
   <meta name="theme-color" content="#0a62ff" />
 
-  <!-- OG -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="ClimPro" />
   <meta property="og:title" content="ClimPro — Expert en climatisation depuis plus de 20 ans" />
@@ -26,7 +26,7 @@
       --bg:#f9fbff; --ink:#0f172a; --muted:#475569; --card:#fff;
       --radius:12px; --shadow:0 6px 24px rgba(0,0,0,.06); --max-w:1200px;
       --space:clamp(12px,2.4vw,24px); --space-lg:clamp(24px,4vw,56px);
-      --fs-h1:clamp(28px,4.2vw,46px); --fs-h2:clamp(20px,3vw,32px); --fs-h3:clamp(16px,2.2vw,20px);
+      --fs-h1:clamp(28px,4.2vw,46px);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -38,131 +38,108 @@
     /* HEADER */
     header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #eaeef0}
     .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0;height:64px}
-    .brand{display:flex;align-items:center;gap:10px;height:64px;overflow:visible;position:relative;z-index:2}
+    .brand{display:flex;align-items:center;gap:10px;height:64px;overflow:visible}
     .brand img{height:56px;width:auto;transition:height .2s ease}
     .nav__links{display:flex;gap:12px;align-items:center}
     .nav__links a{font-weight:700;color:var(--ink);font-size:clamp(14px,1.2vw,16px)}
     .nav__cta{display:flex;gap:10px;align-items:center}
     .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;font-weight:800;border:0;cursor:pointer;background:var(--brand-blue);color:#fff;box-shadow:var(--shadow);transition:transform .15s ease, box-shadow .2s ease}
-    .btn:hover,.btn:focus-visible{transform:translateY(-1px);box-shadow:0 10px 30px rgba(10,98,255,.3)}
 
     /* HERO */
     .hero{padding:var(--space-lg) 0}
     .hero__grid{display:grid;gap:var(--space);align-items:center}
     .hero h1{font-size:var(--fs-h1);line-height:1.12;margin:0 0 8px}
     .hero p.lead{color:var(--muted);margin:0 0 12px}
-    .hero__actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;justify-content:flex-start}
     .hero__card{background:var(--card);border:1px solid #e9eff5;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
     .hero__img{width:100%;aspect-ratio:16/9;object-fit:cover}
 
     /* GENERIC SECTIONS */
     .section{padding:var(--space-lg) 0}
-    .cards{display:grid;gap:14px}
-    .card{background:#fff;border:1px solid #e9eff5;border-radius:12px;padding:16px;box-shadow:var(--shadow)}
-    .card h3{font-size:var(--fs-h3);margin:0 0 6px}
-    .card p{margin:0;color:var(--muted)}
 
-    /* CONTACT layout (desktop) */
-    .contact__wrap{display:grid;gap:16px}
-    .contact__row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-
-    /* ICON-ONLY buttons (email+phone) */
+    /* CONTACT — icônes seulement */
+    .contact__wrap{display:grid;gap:12px}
+    .contact__row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
     .btn-icon{
-      position:relative; display:inline-grid; place-items:center;
-      padding:14px; border-radius:14px; background:#fff; border:1px solid #dbe3ff;
-      box-shadow:var(--shadow); transition:transform .12s ease, box-shadow .2s ease, background .2s ease;
+      display:inline-grid;place-items:center;padding:12px;border-radius:14px;
+      background:#fff;border:1px solid #dbe3ff;box-shadow:var(--shadow);
+      transition:transform .12s ease, box-shadow .2s ease, background .2s ease, filter .2s ease;
     }
-    .btn-icon svg{width:22px;height:22px;display:block}
-    .btn-icon:active{transform:scale(.97); background:linear-gradient(180deg, rgba(10,98,255,.08), rgba(10,98,255,.02))}
-    .btn-icon:focus-visible{outline:2px solid var(--brand-blue); outline-offset:3px}
+    .btn-icon svg{width:24px;height:24px;display:block}
+    .btn-icon:active{transform:scale(.97);background:linear-gradient(180deg,rgba(10,98,255,.08),rgba(10,98,255,.02));filter:saturate(120%)}
 
-    /* FOOTER (desktop) */
+    /* FOOTER (desktop par défaut) */
     footer{border-top:1px solid #eaeef0;background:#fff}
-    .footgrid{display:grid;gap:10px;padding:18px 0}
-    footer *{font-family:inherit !important}
-    .footgrid small, .footgrid a, .footgrid strong{font-size:12px;line-height:1.3}
+    .footline{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:12px 0}
+    .footline small,.footline a{font-size:12px;line-height:1.3;color:#475569}
+    .dot{opacity:.5}
 
-    /* DESKTOP GRIDS */
+    /* ZONES: carte simple */
+    #zones-map{height:360px;border:1px solid #e9eff5;border-radius:12px;overflow:hidden}
+
+    /* DESKTOP grids */
     @media(min-width:768px){
       .brand img{height:64px}
       .hero__grid{grid-template-columns:1.05fr .95fr}
-      .cards{grid-template-columns:repeat(3,1fr)}
-      .contact__wrap{grid-template-columns:1.1fr .9fr}
-      .footgrid{grid-template-columns:1.4fr 1fr 1fr}
     }
 
     body{display:flex;flex-direction:column} main{flex:1}
     .nav__right{display:flex;align-items:center;gap:16px;margin-left:auto;padding-right:6px}
 
-    /* ZONES: carte simple */
-    #zones-map{height:360px;border:1px solid #e9eff5;border-radius:12px;overflow:hidden}
-
     /* =========================
-       📱 TÉLÉPHONE (≤1024px)
+       📱 MOBILE (≤1024px)
        ========================= */
-    .fab-wa{display:none} /* hidden desktop */
-
+    .fab-wa{display:none} /* caché desktop */
     @media (max-width:1024px){
-      /* 1) Navbar plus fine, mais LOGO x3 (sans augmenter la barre) */
-      .nav{height:52px}
-      .brand img{
-        height:156px;              /* ~3× */
-        margin-top:-56px;          /* déborde au-dessus */
-        z-index:3;
-        pointer-events:none;       /* évite les clics fantômes */
-      }
-
-      /* 2) Justifier titre + paragraphe du héros */
+      /* NAV : augmente le CADRE + le LOGO, pas de déformation */
+      .nav{height:80px}                 /* cadre plus haut pour accueillir le grand logo */
+      .brand{height:80px}
+      .brand img{height:150px}          /* logo bien plus grand, propre */
+      .nav__cta{display:none}           /* on retire "Parler à un expert" */
+      /* HERO : titre + texte justifiés */
       .hero h1, .hero p.lead{ text-align:justify; hyphens:auto }
 
-      /* 3) Retirer CTA "Parler à un expert" (nav + hero) */
-      .nav__cta{display:none}
-      .hero__actions{display:none}
-
-      /* 4) Supprimer les 3 cartes services en mobile (on garde les liens en nav) */
+      /* SERVICES : retirés en mobile (on garde les liens en nav) */
       .section--services{display:none}
 
-      /* 5) Zones : carte seule + resserrer les espacements autour */
-      .section--zones{ padding-top:14px; padding-bottom:14px }
-      .section--zones h2, .zones-legend, .zones-texte, #chips-bruxelles, #chips-autres, .section--zones p{display:none}
+      /* ZONES : titre visible, carte seule, espacement serré */
+      .section--zones{ padding-top:12px; padding-bottom:12px }
+      .section--zones h2{ margin:0 0 8px; text-align:left }
+      .zones-legend, .zones-texte, #chips-bruxelles, #chips-autres, .section--zones p{display:none}
       #zones-map{ height:300px }
 
-      /* 6) Contact : retirer le titre, rapprocher des zones, boutons serrés */
+      /* CONTACT : sans titre, proche des zones, boutons rapprochés */
       .section--contact h2{ display:none }
-      .section--contact{ padding-top:8px; padding-bottom:12px }
+      .section--contact{ padding-top:8px; padding-bottom:10px }
       .contact__row{ gap:8px }
       .btn-icon{ padding:12px }
-      .btn-icon svg{ width:24px; height:24px } /* un peu plus grand sur mobile */
+      .btn-icon svg{ width:26px; height:26px }
 
-      /* 7) Footer ULTRA compact (police /2, marges mini) */
-      .footgrid{ padding:6px 0; gap:2px }
-      .footgrid small, .footgrid a, .footgrid strong{ font-size:8px; line-height:1.1 }
-      footer .container{ width:calc(100% - 12px) }
+      /* FOOTER : ultra compact, police /2, éléments sur une ligne */
+      .footline{ padding:6px 0; gap:8px; white-space:nowrap; overflow:auto }
+      .footline small,.footline a{ font-size:8px; line-height:1.1 }
 
-      /* 8) Laisse de la place pour le bouton flottant */
+      /* espace pour le bouton flottant */
       body{ padding-bottom:86px }
 
-      /* 9) Bouton flottant WhatsApp — icône agrandie (pas le rond) */
+      /* WhatsApp flottant : logo intérieur encore plus grand (bulle inchangée) */
       .fab-wa{
         position:fixed; right:clamp(12px,2.5vw,20px);
         bottom:calc(14px + env(safe-area-inset-bottom,0px));
         width:62px; height:62px; border-radius:999px;
-        background:var(--wa); color:#fff;
-        display:grid; place-items:center;
+        background:var(--wa); color:#fff; display:grid; place-items:center;
         box-shadow:0 10px 26px rgba(0,0,0,.22), 0 2px 8px rgba(0,0,0,.18);
-        z-index:9999; text-decoration:none;
-        transition:transform .14s ease, box-shadow .2s ease;
+        z-index:9999; text-decoration:none; transition:transform .14s ease, box-shadow .2s ease;
         -webkit-tap-highlight-color:transparent;
       }
-      .fab-wa svg{ width:38px; height:38px } /* icône ++ dans la bulle */
+      .fab-wa svg{ width:42px; height:42px } /* ++ icône interne */
       .fab-wa:hover{ transform:translateY(-1px) }
       .fab-wa:active{ transform:translateY(1px) scale(.98) }
     }
 
-    /* Accessibilité : texte masqué pour lecteurs d’écran */
+    /* Accessibilité */
     .sr-only{
-      position:absolute!important; width:1px; height:1px; padding:0; margin:-1px;
-      overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+      position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;
+      overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
     }
   </style>
 
@@ -198,10 +175,6 @@
         <div class="hero__left">
           <h1>Du frais l’été, du confort toute l’année.</h1>
           <p class="lead">Experts en climatisation depuis plus de 20 ans à Bruxelles. Nous installons, entretenons et dépannons tous types de climatiseurs pour particuliers et professionnels. Solutions performantes, durables et écoénergétiques. Intervention rapide dans toutes les communes de Bruxelles et périphérie.</p>
-          <div class="hero__actions">
-            <!-- masqué en mobile -->
-            <a class="btn" href="tel:+3224284035">Parler à un expert</a>
-          </div>
         </div>
         <div class="hero__media">
           <div class="hero__card">
@@ -211,16 +184,14 @@
       </div>
     </section>
 
-    <!-- SERVICES (caché en mobile) -->
+    <!-- SERVICES (cachés en mobile) -->
     <section class="section section--services" aria-label="Nos services">
-      <div class="container cards">
-        <article class="card"><h3>Dépannage</h3><p>Panne, fuite, code erreur ? Intervention rapide toutes marques, diagnostic clair et remise en route soignée.</p></article>
-        <article class="card"><h3>Entretien</h3><p>Prolongez la durée de vie et gardez un air sain : nettoyage complet, contrôle des performances, rapport simple.</p></article>
-        <article class="card"><h3>Installation</h3><p>Solution sur mesure, pose propre en 1–2 jours, conseils pour consommer moins — et profiter plus.</p></article>
+      <div class="container">
+        <!-- contenu desktop conservé ailleurs si nécessaire -->
       </div>
     </section>
 
-    <!-- ZONES — Carte de la Belgique seule -->
+    <!-- ZONES — titre visible + carte Belgique seule -->
     <section class="section section--zones" aria-label="Zones desservies">
       <div class="container">
         <h2>Zones desservies</h2>
@@ -228,17 +199,19 @@
       </div>
     </section>
 
-    <!-- CONTACT — 2 boutons (icônes) sans titre, espacement réduit -->
+    <!-- CONTACT — 2 boutons icônes, sans titre, espacement réduit -->
     <section class="section section--contact" aria-label="Contact">
       <div class="container contact__wrap">
         <h2 class="sr-only">Contact</h2>
         <div class="contact__row">
           <a class="btn-icon" href="tel:+3224284035" aria-label="Appeler">
+            <!-- phone -->
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path fill="currentColor" d="M6.6 10.8c1.2 2.2 3.2 4.2 5.4 5.4l1.8-1.8c.3-.3.8-.4 1.2-.2 1 .4 2 .6 3.1.6.7 0 1.2.5 1.2 1.2v2.9c0 .7-.5 1.2-1.2 1.2C10.4 21.3 2.7 13.6 2.7 4.9c0-.7.5-1.2 1.2-1.2h3c.7 0 1.2.5 1.2 1.2 0 1.1.2 2.1.6 3.1.1.4 0 .9-.3 1.2l-1.8 1.8z"/>
             </svg>
           </a>
           <a class="btn-icon" href="mailto:info@climpro.be" aria-label="Envoyer un email">
+            <!-- mail -->
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path fill="currentColor" d="M12 13.065 2.4 6h19.2L12 13.065ZM2 7.5v10h20v-10L12 14.5 2 7.5Z"/>
             </svg>
@@ -248,31 +221,34 @@
     </section>
   </main>
 
-  <!-- FOOTER ultra compact -->
+  <!-- FOOTER — ultra compact, éléments sur une seule ligne (scroll horizontal si trop long) -->
   <footer>
-    <div class="container footgrid" itemscope itemtype="https://schema.org/Organization">
-      <div>
-        <small itemprop="description">Expert en climatisation depuis plus de 20 ans — installation, entretien, dépannage.</small><br>
-        <small><span itemprop="vatID">TVA : BE0564.697.277</span> • <span itemprop="address">Rue des Colombophiles 133, 1070 Bruxelles</span></small>
-      </div>
-      <div>
-        <small><strong>Navigation</strong> — 
-          <a href="/entretien.html">Entretien</a> ·
-          <a href="/depannage.html">Dépannage</a> ·
-          <a href="/installation.html">Installation</a> ·
-          <a href="/blog.html">Blog</a>
-        </small>
-      </div>
-      <div>
-        <small><strong>Contact</strong> — 
-          <a href="tel:+3224284035">+32 2 428 40 35</a> ·
-          <a href="mailto:info@climpro.be">info@climpro.be</a>
-        </small>
-      </div>
+    <div class="container footline" itemscope itemtype="https://schema.org/Organization" aria-label="Pied de page">
+      <small itemprop="description">Expert climatisation 20+ ans</small>
+      <span class="dot">•</span>
+      <small><span itemprop="vatID">TVA: BE0564.697.277</span></small>
+      <span class="dot">•</span>
+      <small itemprop="address">Rue des Colombophiles 133, 1070 Bruxelles</small>
+      <span class="dot">•</span>
+      <a href="tel:+3224284035">+32 2 428 40 35</a>
+      <span class="dot">•</span>
+      <a href="mailto:info@climpro.be">info@climpro.be</a>
+      <span class="dot">•</span>
+      <a href="/entretien.html">Entretien</a>
+      <span class="dot">•</span>
+      <a href="/depannage.html">Dépannage</a>
+      <span class="dot">•</span>
+      <a href="/installation.html">Installation</a>
+      <span class="dot">•</span>
+      <a href="/blog.html">Blog</a>
+      <span class="dot">•</span>
+      <a href="/mentions-legales.html">Mentions légales</a>
+      <span class="dot">•</span>
+      <a href="/politique-confidentialite.html">Confidentialité</a>
     </div>
   </footer>
 
-  <!-- 📱 Bouton flottant WhatsApp (icône agrandie) -->
+  <!-- 📱 FAB WhatsApp (logo + grand, bulle identique) -->
   <a class="fab-wa" href="https://wa.me/32473478366" target="_blank" rel="noopener" aria-label="Ouvrir WhatsApp">
     <svg viewBox="0 0 32 32" aria-hidden="true">
       <path fill="#fff" d="M19.11 17.02c-.27-.13-1.6-.79-1.85-.88-.25-.09-.43-.13-.62.13-.18.27-.71.88-.87 1.06-.16.18-.32.2-.59.07-.27-.13-1.13-.42-2.16-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.41.12-.54.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.13-.62-1.49-.85-2.04-.22-.53-.45-.45-.62-.46-.16-.01-.34-.01-.52-.01-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29 0 1.35.99 2.65 1.13 2.83.14.18 1.95 2.98 4.73 4.19.66.28 1.18.45 1.58.57.66.21 1.26.18 1.73.11.53-.08 1.6-.65 1.82-1.27.23-.62.23-1.15.16-1.27-.07-.11-.25-.18-.52-.31z"/>
@@ -300,14 +276,13 @@
   </script>
 
   <!-- Leaflet -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script>
-    // Carte Belgique seule, limites de déplacement à la Belgique
+    // Carte Belgique seule, panning limité aux frontières
     (function(){
       var el = document.getElementById('zones-map'); if(!el || !window.L) return;
 
-      // BBox approximative Belgique
+      // BBox Belgique approximative
       var southWest = L.latLng(49.5, 2.5);
       var northEast = L.latLng(51.7, 6.5);
       var beBounds  = L.latLngBounds(southWest, northEast);
@@ -317,7 +292,7 @@
         attributionControl:true,
         maxBounds: beBounds,
         maxBoundsViscosity: 1.0,
-        minZoom: 6,
+        minZoom: 6
       });
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
