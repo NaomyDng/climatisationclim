@@ -35,16 +35,15 @@
     img{max-width:100%;height:auto;display:block}
     .container{width:min(100% - 2*var(--space), var(--max-w));margin-inline:auto}
 
-    /* HEADER (desktop par défaut) */
+    /* HEADER */
     header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #eaeef0}
     .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0;height:64px}
     .brand{display:flex;align-items:center;gap:10px;height:64px;overflow:visible}
-    /* IMPORTANT : ne pas déformer le logo sur desktop */
-    .brand img{height:56px;width:auto;max-width:none}
-
+    .brand img{height:56px;width:auto;transition:height .2s ease}
     .nav__links{display:flex;gap:12px;align-items:center}
     .nav__links a{font-weight:700;color:var(--ink);font-size:clamp(14px,1.2vw,16px)}
     .nav__cta{display:flex;gap:10px;align-items:center}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;font-weight:800;border:0;cursor:pointer;background:var(--brand-blue);color:#fff;box-shadow:var(--shadow);transition:transform .15s ease, box-shadow .2s ease}
 
     /* HERO */
     .hero{padding:var(--space-lg) 0}
@@ -54,8 +53,10 @@
     .hero__card{background:var(--card);border:1px solid #e9eff5;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
     .hero__img{width:100%;aspect-ratio:16/9;object-fit:cover}
 
-    /* SECTIONS & CONTACT */
+    /* GENERIC SECTIONS */
     .section{padding:var(--space-lg) 0}
+
+    /* CONTACT — icônes seulement */
     .contact__wrap{display:grid;gap:12px}
     .contact__row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
     .btn-icon{
@@ -66,7 +67,7 @@
     .btn-icon svg{width:24px;height:24px;display:block}
     .btn-icon:active{transform:scale(.97);background:linear-gradient(180deg,rgba(10,98,255,.08),rgba(10,98,255,.02));filter:saturate(120%)}
 
-    /* FOOTER compact (ligne unique possible) */
+    /* FOOTER (desktop par défaut) */
     footer{border-top:1px solid #eaeef0;background:#fff}
     .footline{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:12px 0}
     .footline small,.footline a{font-size:12px;line-height:1.3;color:#475569}
@@ -75,11 +76,12 @@
     /* ZONES: carte simple */
     #zones-map{height:360px;border:1px solid #e9eff5;border-radius:12px;overflow:hidden}
 
-    /* Desktop tweaks */
+    /* DESKTOP grids */
     @media(min-width:768px){
       .brand img{height:64px}
       .hero__grid{grid-template-columns:1.05fr .95fr}
     }
+
     body{display:flex;flex-direction:column} main{flex:1}
     .nav__right{display:flex;align-items:center;gap:16px;margin-left:auto;padding-right:6px}
 
@@ -87,46 +89,39 @@
        📱 MOBILE (≤1024px)
        ========================= */
     .fab-wa{display:none} /* caché desktop */
-
     @media (max-width:1024px){
-      /* NAV BAR + LOGO : décompresser & agrandir le logo sans l’écraser */
-      .nav{height:46px}                /* nav barre réduite */
-      .brand{height:46px; overflow:visible}
-      /* ✅ le logo n'a PAS de hauteur fixe : on laisse l'aspect ratio naturel */
-      .brand img{
-        height:auto !important;        /* pas de contrainte verticale */
-        width:auto !important;         /* pas d'étirement horizontal */
-        max-height:140px;              /* grand, mais naturel */
-        transform:translateY(-38px);   /* il dépasse au-dessus de la barre */
-        will-change:transform;
-      }
-      .nav__cta{display:none}          /* pas de “Parler à un expert” en mobile */
-
-      /* HERO : justifié */
+      /* NAV : augmente le CADRE + le LOGO, pas de déformation */
+      .nav{height:80px}                 /* cadre plus haut pour accueillir le grand logo */
+      .brand{height:80px}
+      .brand img{height:150px}          /* logo bien plus grand, propre */
+      .nav__cta{display:none}           /* on retire "Parler à un expert" */
+      /* HERO : titre + texte justifiés */
       .hero h1, .hero p.lead{ text-align:justify; hyphens:auto }
 
-      /* SERVICES masqués en mobile (on garde les liens de nav) */
+      /* SERVICES : retirés en mobile (on garde les liens en nav) */
       .section--services{display:none}
 
-      /* ZONES : titre visible + carte seule + espacement serré */
+      /* ZONES : titre visible, carte seule, espacement serré */
       .section--zones{ padding-top:12px; padding-bottom:12px }
-      .section--zones h2{ margin:0 0 8px }
+      .section--zones h2{ margin:0 0 8px; text-align:left }
+      .zones-legend, .zones-texte, #chips-bruxelles, #chips-autres, .section--zones p{display:none}
       #zones-map{ height:300px }
 
       /* CONTACT : sans titre, proche des zones, boutons rapprochés */
       .section--contact h2{ display:none }
       .section--contact{ padding-top:8px; padding-bottom:10px }
       .contact__row{ gap:8px }
+      .btn-icon{ padding:12px }
       .btn-icon svg{ width:26px; height:26px }
 
-      /* FOOTER : ultra compact, police réduite et éléments en ligne */
+      /* FOOTER : ultra compact, police /2, éléments sur une ligne */
       .footline{ padding:6px 0; gap:8px; white-space:nowrap; overflow:auto }
       .footline small,.footline a{ font-size:8px; line-height:1.1 }
 
-      /* Espace bas pour le bouton flottant */
+      /* espace pour le bouton flottant */
       body{ padding-bottom:86px }
 
-      /* FAB WhatsApp : même bulle, icône intérieure encore + grande */
+      /* WhatsApp flottant : logo intérieur encore plus grand (bulle inchangée) */
       .fab-wa{
         position:fixed; right:clamp(12px,2.5vw,20px);
         bottom:calc(14px + env(safe-area-inset-bottom,0px));
@@ -136,7 +131,7 @@
         z-index:9999; text-decoration:none; transition:transform .14s ease, box-shadow .2s ease;
         -webkit-tap-highlight-color:transparent;
       }
-      .fab-wa svg{ width:46px; height:46px } /* ⬆️ icône interne plus grande (décompressée) */
+      .fab-wa svg{ width:42px; height:42px } /* ++ icône interne */
       .fab-wa:hover{ transform:translateY(-1px) }
       .fab-wa:active{ transform:translateY(1px) scale(.98) }
     }
@@ -156,7 +151,6 @@
   <header>
     <div class="container nav">
       <a href="/" class="brand" aria-label="ClimPro, accueil">
-        <!-- width/height HTML présents mais ignorés par CSS mobile (décompression) -->
         <img src="logo.webp" alt="ClimPro — logo" width="200" height="64" />
       </a>
       <div class="nav__right">
@@ -190,12 +184,14 @@
       </div>
     </section>
 
-    <!-- SERVICES (caché en mobile) -->
+    <!-- SERVICES (cachés en mobile) -->
     <section class="section section--services" aria-label="Nos services">
-      <div class="container"></div>
+      <div class="container">
+        <!-- contenu desktop conservé ailleurs si nécessaire -->
+      </div>
     </section>
 
-    <!-- ZONES — titre + carte Belgique seule -->
+    <!-- ZONES — titre visible + carte Belgique seule -->
     <section class="section section--zones" aria-label="Zones desservies">
       <div class="container">
         <h2>Zones desservies</h2>
@@ -203,17 +199,19 @@
       </div>
     </section>
 
-    <!-- CONTACT — 2 boutons icônes seulement -->
+    <!-- CONTACT — 2 boutons icônes, sans titre, espacement réduit -->
     <section class="section section--contact" aria-label="Contact">
       <div class="container contact__wrap">
         <h2 class="sr-only">Contact</h2>
         <div class="contact__row">
           <a class="btn-icon" href="tel:+3224284035" aria-label="Appeler">
+            <!-- phone -->
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path fill="currentColor" d="M6.6 10.8c1.2 2.2 3.2 4.2 5.4 5.4l1.8-1.8c.3-.3.8-.4 1.2-.2 1 .4 2 .6 3.1.6.7 0 1.2.5 1.2 1.2v2.9c0 .7-.5 1.2-1.2 1.2C10.4 21.3 2.7 13.6 2.7 4.9c0-.7.5-1.2 1.2-1.2h3c.7 0 1.2.5 1.2 1.2 0 1.1.2 2.1.6 3.1.1.4 0 .9-.3 1.2l-1.8 1.8z"/>
             </svg>
           </a>
           <a class="btn-icon" href="mailto:info@climpro.be" aria-label="Envoyer un email">
+            <!-- mail -->
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path fill="currentColor" d="M12 13.065 2.4 6h19.2L12 13.065ZM2 7.5v10h20v-10L12 14.5 2 7.5Z"/>
             </svg>
@@ -223,7 +221,7 @@
     </section>
   </main>
 
-  <!-- FOOTER très compact, éléments sur une ligne -->
+  <!-- FOOTER — ultra compact, éléments sur une seule ligne (scroll horizontal si trop long) -->
   <footer>
     <div class="container footline" itemscope itemtype="https://schema.org/Organization" aria-label="Pied de page">
       <small itemprop="description">Expert climatisation 20+ ans</small>
@@ -243,10 +241,14 @@
       <a href="/installation.html">Installation</a>
       <span class="dot">•</span>
       <a href="/blog.html">Blog</a>
+      <span class="dot">•</span>
+      <a href="/mentions-legales.html">Mentions légales</a>
+      <span class="dot">•</span>
+      <a href="/politique-confidentialite.html">Confidentialité</a>
     </div>
   </footer>
 
-  <!-- 📱 Bouton flottant WhatsApp (icône encore plus grande) -->
+  <!-- 📱 FAB WhatsApp (logo + grand, bulle identique) -->
   <a class="fab-wa" href="https://wa.me/32473478366" target="_blank" rel="noopener" aria-label="Ouvrir WhatsApp">
     <svg viewBox="0 0 32 32" aria-hidden="true">
       <path fill="#fff" d="M19.11 17.02c-.27-.13-1.6-.79-1.85-.88-.25-.09-.43-.13-.62.13-.18.27-.71.88-.87 1.06-.16.18-.32.2-.59.07-.27-.13-1.13-.42-2.16-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.41.12-.54.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.13-.62-1.49-.85-2.04-.22-.53-.45-.45-.62-.46-.16-.01-.34-.01-.52-.01-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29 0 1.35.99 2.65 1.13 2.83.14.18 1.95 2.98 4.73 4.19.66.28 1.18.45 1.58.57.66.21 1.26.18 1.73.11.53-.08 1.6-.65 1.82-1.27.23-.62.23-1.15.16-1.27-.07-.11-.25-.18-.52-.31z"/>
@@ -279,6 +281,8 @@
     // Carte Belgique seule, panning limité aux frontières
     (function(){
       var el = document.getElementById('zones-map'); if(!el || !window.L) return;
+
+      // BBox Belgique approximative
       var southWest = L.latLng(49.5, 2.5);
       var northEast = L.latLng(51.7, 6.5);
       var beBounds  = L.latLngBounds(southWest, northEast);
