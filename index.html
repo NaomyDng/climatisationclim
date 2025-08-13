@@ -9,7 +9,7 @@
   <meta name="robots" content="index,follow" />
   <meta name="theme-color" content="#0a62ff" />
 
-  <!-- Open Graph -->
+  <!-- OG -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="ClimPro" />
   <meta property="og:title" content="ClimPro — Expert en climatisation depuis plus de 20 ans" />
@@ -18,7 +18,6 @@
   <meta property="og:image" content="og-cover.webp" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Preload LCP -->
   <link rel="preload" as="image" href="accueil.webp" fetchpriority="high" />
 
   <style>
@@ -39,7 +38,7 @@
     /* HEADER */
     header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #eaeef0}
     .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0;height:64px}
-    .brand{display:flex;align-items:center;gap:10px;height:64px;overflow:visible}
+    .brand{display:flex;align-items:center;gap:10px;height:64px;overflow:visible;position:relative;z-index:2}
     .brand img{height:56px;width:auto;transition:height .2s ease}
     .nav__links{display:flex;gap:12px;align-items:center}
     .nav__links a{font-weight:700;color:var(--ink);font-size:clamp(14px,1.2vw,16px)}
@@ -63,11 +62,11 @@
     .card h3{font-size:var(--fs-h3);margin:0 0 6px}
     .card p{margin:0;color:var(--muted)}
 
-    /* CONTACT layout */
+    /* CONTACT layout (desktop) */
     .contact__wrap{display:grid;gap:16px}
     .contact__row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 
-    /* ICON-ONLY buttons for contact */
+    /* ICON-ONLY buttons (email+phone) */
     .btn-icon{
       position:relative; display:inline-grid; place-items:center;
       padding:14px; border-radius:14px; background:#fff; border:1px solid #dbe3ff;
@@ -77,7 +76,7 @@
     .btn-icon:active{transform:scale(.97); background:linear-gradient(180deg, rgba(10,98,255,.08), rgba(10,98,255,.02))}
     .btn-icon:focus-visible{outline:2px solid var(--brand-blue); outline-offset:3px}
 
-    /* FOOTER (pro & compact) */
+    /* FOOTER (desktop) */
     footer{border-top:1px solid #eaeef0;background:#fff}
     .footgrid{display:grid;gap:10px;padding:18px 0}
     footer *{font-family:inherit !important}
@@ -95,7 +94,7 @@
     body{display:flex;flex-direction:column} main{flex:1}
     .nav__right{display:flex;align-items:center;gap:16px;margin-left:auto;padding-right:6px}
 
-    /* === ZONES (map only) === */
+    /* ZONES: carte simple */
     #zones-map{height:360px;border:1px solid #e9eff5;border-radius:12px;overflow:hidden}
 
     /* =========================
@@ -104,27 +103,46 @@
     .fab-wa{display:none} /* hidden desktop */
 
     @media (max-width:1024px){
-      /* 1) Nav plus petite mais logo PLUS GRAND (dépasse discrètement) */
+      /* 1) Navbar plus fine, mais LOGO x3 (sans augmenter la barre) */
       .nav{height:52px}
-      .brand img{height:68px;margin-top:-6px} /* logo plus grand, nav réduite */
-      .nav__cta{display:none}                 /* retire "Parler à un expert" */
-      .hero__actions{display:none}            /* retire CTA hero */
+      .brand img{
+        height:156px;              /* ~3× */
+        margin-top:-56px;          /* déborde au-dessus */
+        z-index:3;
+        pointer-events:none;       /* évite les clics fantômes */
+      }
 
-      /* 2) Retirer les 3 cartes services (on garde les liens en nav) */
+      /* 2) Justifier titre + paragraphe du héros */
+      .hero h1, .hero p.lead{ text-align:justify; hyphens:auto }
+
+      /* 3) Retirer CTA "Parler à un expert" (nav + hero) */
+      .nav__cta{display:none}
+      .hero__actions{display:none}
+
+      /* 4) Supprimer les 3 cartes services en mobile (on garde les liens en nav) */
       .section--services{display:none}
 
-      /* 3) Zones : carte uniquement, pas de texte/listes */
-      .zones-legend, .zones-texte, #chips-bruxelles, #chips-autres, .section--zones p{display:none}
+      /* 5) Zones : carte seule + resserrer les espacements autour */
+      .section--zones{ padding-top:14px; padding-bottom:14px }
+      .section--zones h2, .zones-legend, .zones-texte, #chips-bruxelles, #chips-autres, .section--zones p{display:none}
+      #zones-map{ height:300px }
 
-      /* 4) Footer ULTRA compact */
-      .footgrid{padding:10px 0; gap:4px}
-      .footgrid small, .footgrid a, .footgrid strong{font-size:10px;line-height:1.2}
-      footer .container{width:calc(100% - 16px)} /* respirer sur mobile */
+      /* 6) Contact : retirer le titre, rapprocher des zones, boutons serrés */
+      .section--contact h2{ display:none }
+      .section--contact{ padding-top:8px; padding-bottom:12px }
+      .contact__row{ gap:8px }
+      .btn-icon{ padding:12px }
+      .btn-icon svg{ width:24px; height:24px } /* un peu plus grand sur mobile */
 
-      /* 5) Laisse de l’air pour le bouton flottant */
-      body{padding-bottom:88px}
+      /* 7) Footer ULTRA compact (police /2, marges mini) */
+      .footgrid{ padding:6px 0; gap:2px }
+      .footgrid small, .footgrid a, .footgrid strong{ font-size:8px; line-height:1.1 }
+      footer .container{ width:calc(100% - 12px) }
 
-      /* 6) Bouton flottant WhatsApp (vert) — icône plus grande */
+      /* 8) Laisse de la place pour le bouton flottant */
+      body{ padding-bottom:86px }
+
+      /* 9) Bouton flottant WhatsApp — icône agrandie (pas le rond) */
       .fab-wa{
         position:fixed; right:clamp(12px,2.5vw,20px);
         bottom:calc(14px + env(safe-area-inset-bottom,0px));
@@ -136,12 +154,12 @@
         transition:transform .14s ease, box-shadow .2s ease;
         -webkit-tap-highlight-color:transparent;
       }
-      .fab-wa svg{width:30px;height:30px} /* icône plus grande dans la bulle */
-      .fab-wa:hover{transform:translateY(-1px)}
-      .fab-wa:active{transform:translateY(1px) scale(.98)}
+      .fab-wa svg{ width:38px; height:38px } /* icône ++ dans la bulle */
+      .fab-wa:hover{ transform:translateY(-1px) }
+      .fab-wa:active{ transform:translateY(1px) scale(.98) }
     }
 
-    /* Accessibilité : texte masqué mais lisible pour lecteurs d’écran */
+    /* Accessibilité : texte masqué pour lecteurs d’écran */
     .sr-only{
       position:absolute!important; width:1px; height:1px; padding:0; margin:-1px;
       overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
@@ -193,7 +211,7 @@
       </div>
     </section>
 
-    <!-- SERVICES (sera masqué en mobile) -->
+    <!-- SERVICES (caché en mobile) -->
     <section class="section section--services" aria-label="Nos services">
       <div class="container cards">
         <article class="card"><h3>Dépannage</h3><p>Panne, fuite, code erreur ? Intervention rapide toutes marques, diagnostic clair et remise en route soignée.</p></article>
@@ -202,33 +220,24 @@
       </div>
     </section>
 
-    <!-- ZONES DESSERVIES — Carte Belgique simple (mobile: carte seule) -->
+    <!-- ZONES — Carte de la Belgique seule -->
     <section class="section section--zones" aria-label="Zones desservies">
       <div class="container">
         <h2>Zones desservies</h2>
         <div id="zones-map"></div>
-        <!-- éléments texte/légende masqués en mobile via CSS -->
-        <div class="zones-legend" style="margin-top:8px;display:inline-flex;gap:10px;align-items:center">
-          <small style="color:#64748b">Bruxelles et périphérie</small>
-        </div>
-        <div class="zones-texte" id="zones-texte" style="margin-top:8px;color:#64748b">
-          <small>Liste des communes (desktop).</small>
-        </div>
       </div>
     </section>
 
-    <!-- CONTACT — 2 boutons animés icônes seules -->
-    <section class="section" aria-label="Contact">
+    <!-- CONTACT — 2 boutons (icônes) sans titre, espacement réduit -->
+    <section class="section section--contact" aria-label="Contact">
       <div class="container contact__wrap">
-        <h2>Contact</h2>
+        <h2 class="sr-only">Contact</h2>
         <div class="contact__row">
-          <!-- Appel -->
           <a class="btn-icon" href="tel:+3224284035" aria-label="Appeler">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path fill="currentColor" d="M6.6 10.8c1.2 2.2 3.2 4.2 5.4 5.4l1.8-1.8c.3-.3.8-.4 1.2-.2 1 .4 2 .6 3.1.6.7 0 1.2.5 1.2 1.2v2.9c0 .7-.5 1.2-1.2 1.2C10.4 21.3 2.7 13.6 2.7 4.9c0-.7.5-1.2 1.2-1.2h3c.7 0 1.2.5 1.2 1.2 0 1.1.2 2.1.6 3.1.1.4 0 .9-.3 1.2l-1.8 1.8z"/>
             </svg>
           </a>
-          <!-- Email -->
           <a class="btn-icon" href="mailto:info@climpro.be" aria-label="Envoyer un email">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path fill="currentColor" d="M12 13.065 2.4 6h19.2L12 13.065ZM2 7.5v10h20v-10L12 14.5 2 7.5Z"/>
@@ -239,7 +248,7 @@
     </section>
   </main>
 
-  <!-- FOOTER compact -->
+  <!-- FOOTER ultra compact -->
   <footer>
     <div class="container footgrid" itemscope itemtype="https://schema.org/Organization">
       <div>
@@ -263,7 +272,7 @@
     </div>
   </footer>
 
-  <!-- 📱 Bouton flottant WhatsApp SEUL (vert, icône plus grande) -->
+  <!-- 📱 Bouton flottant WhatsApp (icône agrandie) -->
   <a class="fab-wa" href="https://wa.me/32473478366" target="_blank" rel="noopener" aria-label="Ouvrir WhatsApp">
     <svg viewBox="0 0 32 32" aria-hidden="true">
       <path fill="#fff" d="M19.11 17.02c-.27-.13-1.6-.79-1.85-.88-.25-.09-.43-.13-.62.13-.18.27-.71.88-.87 1.06-.16.18-.32.2-.59.07-.27-.13-1.13-.42-2.16-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.41.12-.54.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.13-.62-1.49-.85-2.04-.22-.53-.45-.45-.62-.46-.16-.01-.34-.01-.52-.01-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29 0 1.35.99 2.65 1.13 2.83.14.18 1.95 2.98 4.73 4.19.66.28 1.18.45 1.58.57.66.21 1.26.18 1.73.11.53-.08 1.6-.65 1.82-1.27.23-.62.23-1.15.16-1.27-.07-.11-.25-.18-.52-.31z"/>
@@ -272,7 +281,7 @@
     <span class="sr-only">Ouvrir WhatsApp (0473 47 83 66)</span>
   </a>
 
-  <!-- JSON-LD: LocalBusiness -->
+  <!-- JSON-LD -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -290,18 +299,33 @@
   }
   </script>
 
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    // Carte Belgique simple
+    // Carte Belgique seule, limites de déplacement à la Belgique
     (function(){
       var el = document.getElementById('zones-map'); if(!el || !window.L) return;
-      var map = L.map('zones-map', {zoomControl:true, attributionControl:true}).setView([50.5039, 4.4699], 7);
+
+      // BBox approximative Belgique
+      var southWest = L.latLng(49.5, 2.5);
+      var northEast = L.latLng(51.7, 6.5);
+      var beBounds  = L.latLngBounds(southWest, northEast);
+
+      var map = L.map('zones-map', {
+        zoomControl:true,
+        attributionControl:true,
+        maxBounds: beBounds,
+        maxBoundsViscosity: 1.0,
+        minZoom: 6,
+      });
+
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
         attribution: '&copy; OpenStreetMap contributors'
       }).addTo(map);
-      // Mobile: pas de texte/liste sous la carte
+
+      map.fitBounds(beBounds, { padding: [10,10] });
     })();
   </script>
 </body>
