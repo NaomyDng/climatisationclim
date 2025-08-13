@@ -1,0 +1,27 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type":"Feature",
+      "properties": { "name": "Bruxelles-Capitale", "served": true },
+      "geometry": {
+        "type":"Polygon",
+        "coordinates":[[
+          [4.25,50.95],[4.60,50.95],[4.60,50.75],[4.25,50.75],[4.25,50.95]
+        ]]
+      }
+    },
+    {
+      "type":"Feature",
+      "properties": { "name": "Brabant wallon", "served": false },
+      "geometry": {
+        "type":"Polygon",
+        "coordinates":[[
+          [4.20,50.70],[4.85,50.70],[4.85,50.30],[4.20,50.30],[4.20,50.70]
+        ]]
+      }
+    }
+  ]
+}
+python3 -m http.server 8080
+
